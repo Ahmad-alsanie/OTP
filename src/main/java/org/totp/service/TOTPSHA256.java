@@ -1,11 +1,13 @@
 package main.java.org.totp.service;
 
+import main.java.org.totp.util.HashType;
+import main.java.org.totp.util.SHAs;
 
 public class TOTPSHA256 implements TOTP {
+	private static final String EXCEPTION_MSG ="Something went wrong with SHA256";
 	@Override
-	public String generateTOTP(long timeStamp, int numberOfDigits, String username,
+	public String generateTOTP(long seconds, int numberOfDigits, String username,
 			char[] password) {
-		// TODO Auto-generated method stub
-		return null;
+		return SHAs.TOTP(EXCEPTION_MSG, HashType.SHA256.getValue(), seconds, numberOfDigits, username, password);
 	}
 }
