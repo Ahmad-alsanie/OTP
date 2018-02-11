@@ -1,14 +1,16 @@
 package main.java.org.totp.util;
 
 import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-public class SHAs {
+public class Hashs {
 	
-	private SHAs(){
+	private Hashs(){
 		//intentionally left blank **Don't Modify**
 	}
 	
@@ -28,7 +30,14 @@ public class SHAs {
 
 		byte[] timeCode = StringConverter.strToByteArray(moves);
 		byte[] userKey = StringConverter.strToByteArray(username + new String(password));
-		hash = hash(expMSG,type, timeCode, userKey);
+		switch (type) {
+		case "MD5":
+			hash = md5(expMSG,type, timeCode, userKey);
+			break;
+		default:
+			hash = sha(expMSG,type, timeCode, userKey);
+			break;
+		}
 
 		int offset = hash[hash.length - 1] & 0xf;
 
@@ -44,7 +53,19 @@ public class SHAs {
 		return result;
 	}
 
-	private static byte[] hash(String expMSG, String code, byte[] time, byte[] userKey) {
+	private static byte[] md5(String expMSG, String type, byte[] timeCode, byte[] userKey) {
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance(HashType.MD5.getValue());
+			 md.update(userKey);
+			 return md.digest(timeCode);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			throw new RuntimeException(expMSG);
+		}
+	}
+
+	private static byte[] sha(String expMSG, String code, byte[] time, byte[] userKey) {
 		try {
 			Mac hashMsgCode;
 			hashMsgCode = Mac.getInstance(code);
