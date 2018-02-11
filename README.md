@@ -1,4 +1,4 @@
-# Overview
+# Overview   ![Build Status](https://travis-ci.org/Ahmad-alsanie/OTP.svg?branch=HEAD)
 OTP is an open source Java Time-Based One Time Password Library, generates pins that depend on username, password and time. 
 It provide support for the following encryption algorithms:
 - SHA1
