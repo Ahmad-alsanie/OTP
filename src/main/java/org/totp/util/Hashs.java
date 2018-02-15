@@ -7,13 +7,36 @@ import java.time.Instant;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
+/**
+ * @author Ahmad-Alsanie 10-2-2018 
+ * Github: https://github.com/Ahmad-alsanie
+ *         ----------------------------------------------------------- 
+ *         The {@code Hashs} class provides a generic method TOTP 
+ */
 public class Hashs {
 	
 	private Hashs(){
 		//intentionally left blank **Don't Modify**
 	}
-	
+	/**Allocates a new {@code String} that contains the generated pin (OTP)
+	 * based on time, username,password and type of encryption
+	 * @param  expMSG
+     *         Message asscoiated with a certain type of encryption 
+     *         to be logged when something wrong happens
+     *
+     * @param  type 
+     *         The used encryption algorithm 
+     *
+     * @param  seconds
+     *         Time slot of the changing pin (OTP)
+     *        
+     * @param  numberOfDigits
+     * 		   The length of the generated pin (OTP)
+     * @param username 
+     * 			String with the value of the username that the pin is for
+     * @param password
+     * 			A char array holds the password of the user
+	 * **/
 	public static String TOTP(String expMSG, String type, long seconds, int numberOfDigits, String username, char[] password) {
 		Instant instant = Instant.now();
 		long timeStamp = instant.toEpochMilli() / 1000;// per second
@@ -52,7 +75,20 @@ public class Hashs {
 		}
 		return result;
 	}
-
+	/**Helper method to generate MD5
+	 * @param  expMSG
+     *         Message asscoiated with a certain type of encryption 
+     *         to be logged when something wrong happens
+     *
+     * @param  type 
+     *         The used encryption algorithm 
+     *
+     * @param  timecode
+     *         byte array represents a time slot
+     *        
+     * @param  userKey
+     * 		   byte array represents both user and password 
+	 * **/
 	private static byte[] md5(String expMSG, String type, byte[] timeCode, byte[] userKey) {
 		MessageDigest md;
 		try {
@@ -64,7 +100,20 @@ public class Hashs {
 			throw new RuntimeException(expMSG);
 		}
 	}
-
+	/**Helper method to generate SHA related byte[]
+	 * @param  expMSG
+     *         Message asscoiated with a certain type of encryption 
+     *         to be logged when something wrong happens
+     *
+     * @param  type 
+     *         The used encryption algorithm 
+     *
+     * @param  timecode
+     *         byte array represents a time slot
+     *        
+     * @param  userKey
+     * 		   byte array represents both user and password 
+	 * **/
 	private static byte[] sha(String expMSG, String code, byte[] time, byte[] userKey) {
 		try {
 			Mac hashMsgCode;
