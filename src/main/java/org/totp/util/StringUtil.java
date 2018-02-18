@@ -5,10 +5,10 @@ package main.java.org.totp.util;
  * @author Ahmad-Alsanie 10-2-2018 
  * Github: https://github.com/Ahmad-alsanie
  *         ----------------------------------------------------------- 
- *         The {@code StringConverter} class provides a util 
+ *         The {@code StringUtil} class provides a util 
  *         method to convert String to byte[] 
  */
-public class StringConverter {
+public class StringUtil {
 	/**Converts received String to a byte[]
 	 * by calling {@link util.Hashs} TOTP util method
 	 * @param  hex
