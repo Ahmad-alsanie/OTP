@@ -51,8 +51,8 @@ public class Hashs {
 		while (moves.length() < 16)
 			moves = "0" + moves;
 
-		byte[] timeCode = StringConverter.strToByteArray(moves);
-		byte[] userKey = StringConverter.strToByteArray(username + new String(password));
+		byte[] timeCode = StringUtil.strToByteArray(moves);
+		byte[] userKey = StringUtil.strToByteArray(username + new String(password));
 		switch (type) {
 		case "MD5":
 			hash = md5(expMSG,type, timeCode, userKey);
