@@ -6,7 +6,7 @@ It provide support for the following encryption algorithms:
 - SHA516
 - MD5
 
-The main Java code is in src/main/. It also includes test cases under src/test, additionnal information can be found in documentation comments or email me at: Ahmad.alsanie@hotmail.com
+The main Java code is in src/main/. It also includes test cases under src/test, additionnal information can be found in documentation comments 
 
 # How to use
 For now the available hashing algorithms are (SHA1, SHA256, SHA516, and MD5) to use one of these methods you justt need to create an instance of your desired encryption type and call the **generateTOTP()** method on it, see the following example:
